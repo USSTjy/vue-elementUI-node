@@ -1,0 +1,9 @@
+body.red {
+  @import '../../theme/red/element-variables.scss';
+}
+body.blue {
+  @import '../../theme/default/element-variables.scss';
+}
+body.green {
+  @import '../../theme/green/element-variables.scss';
+}
