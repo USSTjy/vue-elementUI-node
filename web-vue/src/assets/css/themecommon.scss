@@ -1,0 +1,29 @@
+.el-main {
+  overflow: hidden;
+}
+
+.el-button + .el-button {
+  margin-left: 10px;
+}
+
+.el-textarea__inner:focus,
+.el-input__inner:focus,
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-focus .el-checkbox__inner,
+.el-checkbox__inner:hover,
+.el-radio__input.is-checked .el-radio__inner,
+.el-radio__inner:hover {
+  border-color: $--color-primary;
+}
+
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-radio__input.is-checked .el-radio__inner {
+  background-color: $--color-primary;
+}
+.el-dropdown-menu__item:not(.is-disabled):hover,
+.el-dropdown-menu__item:focus,
+.el-checkbox__input.is-checked + .el-checkbox__label,
+.el-radio__input.is-checked + .el-radio__label,
+.el-date-picker__header-label:hover {
+  color: $--color-primary;
+}

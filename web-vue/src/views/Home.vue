@@ -51,7 +51,7 @@
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="blue">默认</el-dropdown-item>
-                <el-dropdown-item command="red">红色</el-dropdown-item>
+                <el-dropdown-item command="red">墨绿</el-dropdown-item>
                 <el-dropdown-item command="green">绿色</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -61,7 +61,7 @@
           <div class="header-item cursor-pointer">设置</div>
         </div>
       </el-header>
-      <el-main class="overflow-y-auto overflow-x-auto wt100">
+      <el-main class="overflow-y-hidden overflow-x-auto wt100">
         <router-view />
       </el-main>
     </el-container>

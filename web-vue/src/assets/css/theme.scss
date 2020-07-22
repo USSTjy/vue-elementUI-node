@@ -1,9 +1,31 @@
 body.red {
   @import '../../theme/red/element-variables.scss';
+  @import './themecommon.scss';
+
+  .el-dropdown-menu__item:not(.is-disabled):hover,
+  .el-dropdown-menu__item:focus,
+  .el-submenu__title:hover {
+    background-color: #e6f2f2;
+  }
 }
 body.blue {
   @import '../../theme/default/element-variables.scss';
+  @import './themecommon.scss';
+
+  .el-dropdown-menu__item:not(.is-disabled):hover,
+  .el-dropdown-menu__item:focus,
+  .el-submenu__title:hover {
+    background-color: #ecf5ff;
+  }
 }
 body.green {
   @import '../../theme/green/element-variables.scss';
+  @import './themecommon.scss';
+
+  .el-dropdown-menu__item:not(.is-disabled):hover,
+  .el-dropdown-menu__item:focus,
+  .el-submenu__title:hover {
+    background-color: #f5ffe6;
+  }
 }
+@import './main.css';
