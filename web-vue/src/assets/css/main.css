@@ -132,3 +132,6 @@ a:hover {
   border-right: 0px solid #ccc;
   margin: 0;
 }
+.padding-right-10 {
+  padding-right: 10px;
+}

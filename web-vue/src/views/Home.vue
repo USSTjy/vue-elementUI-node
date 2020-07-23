@@ -36,7 +36,6 @@
             {{ item.name }}
           </el-menu-item>
         </template>
-        <el-menu-item> </el-menu-item>
       </el-menu>
     </el-aside>
     <el-container class="ht100 wt100">
