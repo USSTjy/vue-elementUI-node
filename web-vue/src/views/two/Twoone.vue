@@ -1,18 +1,8 @@
 <template>
   <div class="ht100 ">
-    <el-row class="select-table">
-      <el-radio v-model="isCheck" label="0" @change="handleChangeSelect"
-        >多选</el-radio
-      >
-      <el-radio v-model="isCheck" label="1" @change="handleChangeSelect"
-        >单选</el-radio
-      >
-    </el-row>
+    <el-row class="select-table"> </el-row>
     <el-table :data="tableData" height="300" border>
       <el-table-column type="index" label="序号" width="80" align="center">
-        <template slot="header">
-          序号
-        </template>
         <template slot-scope="scope">
           <div @click="handleSelectRadio(scope.$index, scope.row)">
             <el-radio v-model="selectKey" :label="scope.$index + 1">
@@ -28,7 +18,6 @@
         :label="item.label"
       ></el-table-column>
     </el-table>
-    <el-button>{{ $t('commons.change') }}</el-button>
   </div>
 </template>
 <script>
@@ -37,7 +26,6 @@ export default {
   name: 'Twoone',
   data() {
     return {
-      isCheck: '0',
       tableData: [],
       tableColumns: [
         {
@@ -77,9 +65,6 @@ export default {
     },
     handleSelectRadio(index, row) {
       console.log('dddd', index, row)
-    },
-    handleChangeSelect(value) {
-      this.isCheck = value
     }
   }
 }
