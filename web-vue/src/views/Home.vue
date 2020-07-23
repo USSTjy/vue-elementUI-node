@@ -57,6 +57,22 @@
           </div>
           <div class="header-item cursor-pointer">个人中心</div>
           <div class="header-item cursor-pointer">退出登录</div>
+          <div class="header-item cursor-pointer">
+            <el-dropdown trigger="click" @command="changeLang">
+              <span>
+                {{ $t('commons.systemLang') }}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="zh">{{
+                  $t('commons.ch')
+                }}</el-dropdown-item>
+                <el-dropdown-item command="en">{{
+                  $t('commons.en')
+                }}</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
           <div class="header-item cursor-pointer">设置</div>
         </div>
       </el-header>
@@ -108,7 +124,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      systemLang: '中文'
     }
   },
   mounted() {
@@ -131,6 +148,10 @@ export default {
     },
     changeColor(command) {
       this.$store.commit('getColor', command)
+    },
+    changeLang(command) {
+      this.$i18n.locale = command
+      localStorage.setItem('lang', command)
     }
   }
 }
