@@ -44,7 +44,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 /* ---公共样式 */
@@ -134,4 +134,22 @@ a:hover {
 }
 .padding-right-10 {
   padding-right: 10px;
+}
+
+.text-align-right {
+  text-align: right;
+}
+.text-align-left {
+  text-align: left;
+}
+.text-align-center {
+  text-align: center;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}
+/* 修改组件样式  */
+/*  分页显示*/
+.el-input.el-pagination__editor.is-in-pagination {
+  width: 50%;
 }

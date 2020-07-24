@@ -1,0 +1,23 @@
+{
+  "id": "1964575",
+  "name": "测试",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "16103135",
+      "name": "菜单组",
+      "font_class": "caidanzu",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
+      "icon_id": "16103136",
+      "name": "菜单",
+      "font_class": "caidan",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    }
+  ]
+}

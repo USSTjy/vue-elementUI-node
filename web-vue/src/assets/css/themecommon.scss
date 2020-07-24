@@ -27,6 +27,7 @@
 .el-checkbox__input.is-checked + .el-checkbox__label,
 .el-radio__input.is-checked + .el-radio__label,
 .el-date-picker__header-label:hover,
-.el-picker-panel__icon-btn:hover {
+.el-picker-panel__icon-btn:hover,
+.el-select-dropdown__item.selected {
   color: $--color-primary;
 }

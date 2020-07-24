@@ -1,7 +1,7 @@
 <template>
   <div class="ht100 ">
     <el-row class="select-table"> </el-row>
-    <el-table :data="tableData" height="300" border>
+    <el-table :data="tableData" border>
       <el-table-column type="index" label="序号" width="80" align="center">
         <template slot-scope="scope">
           <div @click="handleSelectRadio(scope.$index, scope.row)">
@@ -18,6 +18,18 @@
         :label="item.label"
       ></el-table-column>
     </el-table>
+    <el-row class="text-align-right">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="sizeList"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="tableTotal"
+      >
+      </el-pagination>
+    </el-row>
   </div>
 </template>
 <script>
@@ -27,6 +39,7 @@ export default {
   data() {
     return {
       tableData: [],
+      tableAllData: [],
       tableColumns: [
         {
           label: '地址',
@@ -41,12 +54,16 @@ export default {
           prop: 'name'
         }
       ],
-      selectKey: ''
+      selectKey: '',
+      selectRow: {},
+      currentPage: 1,
+      pageSize: 10,
+      sizeList: [2, 5, 10],
+      tableTotal: 0
     }
   },
   mounted() {
     this.getOneData()
-    console.log('ddddd', this.$i18n)
   },
   methods: {
     getOneData() {
@@ -56,15 +73,31 @@ export default {
       }
       API.getOneData(params).then(res => {
         if (res.data.code === 200) {
-          this.tableData = res.data.data
+          console.log('data===', res)
+          this.tableAllData = res.data.data
+          this.tableTotal = res.data.data.length
+          this.handleCurrentChange(1)
         }
-      })
-      API.getTwoData(params).then(res => {
-        console.log('res11====', res.data)
       })
     },
     handleSelectRadio(index, row) {
-      console.log('dddd', index, row)
+      this.selectKey = index
+      this.selectRow = row
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+      this.tableData = this.tableAllData.slice(
+        this.pageSize * (val - 1),
+        this.pageSize * val
+      )
+    },
+    handleSizeChange(val) {
+      this.pageSize = val
+      this.currentPage = 1
+      this.tableData = this.tableAllData.slice(
+        val * (this.currentPage - 1),
+        val * this.currentPage
+      )
     }
   }
 }
