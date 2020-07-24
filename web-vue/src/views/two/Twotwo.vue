@@ -37,10 +37,52 @@
           aliicon
         }}"
       </p>
+      <div class="title">font Awesome图标的引入方法：</div>
+      <p>
+        <span class="number">1. </span>在vue项目中<span class="font-bold"
+          >npm i font-awesome -S</span
+        >后, 在main.js中引入<span class="font-bold"
+          >import 'font-awesome/css/font-awesome.min.css'</span
+        >或者在需要使用此图标时在组件中引入文件
+      </p>
+      <p>
+        <span class="number"> 2.</span>
+        <a href="http://www.fontawesome.com.cn/" target="_blank"
+          ><span class="font-bold">网址（首页）</span></a
+        >，找到心仪的图标
+      </p>
+      <p>
+        <span class="number"> 3. </span>
+        使用方法可参考网址：<a
+          href="http://www.fontawesome.com.cn/examples/"
+          target="_blank"
+          ><span class="font-bold"
+            >http://www.fontawesome.com.cn/examples/</span
+          ></a
+        >
+      </p>
+      <div>
+        例如：
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+
+        <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+
+        <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+
+        <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+      </div>
     </el-row>
   </div>
 </template>
 <script>
+import 'font-awesome/css/font-awesome.min.css'
 export default {
   name: 'Twotwo',
   data() {
