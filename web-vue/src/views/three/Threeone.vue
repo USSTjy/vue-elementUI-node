@@ -1,6 +1,11 @@
 <template>
   <div class="ht100">
-    <div>canvas练习</div>
+    <div class="canvas-header">
+      <h1>canvas练习</h1>
+      <p>
+        制作一个简陋的仪表盘，当鼠标放在指针上时可以显示一个modal，并显示当前值
+      </p>
+    </div>
     <div class="text-align-center">
       <canvas
         ref="mycanvas1"
@@ -8,7 +13,11 @@
         width="540"
         height="500"
         class="bg-ccc"
+        @mousemove="handleMouseMove($event)"
       ></canvas>
+      <div class="style-test" id="canvas-value">
+        完成率： {{ this.numdata.toFixed(2) }}%
+      </div>
     </div>
   </div>
 </template>
@@ -20,17 +29,35 @@ export default {
       data: [],
       canvas: null,
       canvas1: null,
-      colorList: ['red', 'yellow', 'green']
+      colorList: ['red', 'yellow', 'green'],
+      numdata: 0,
+      mouseEvent: ''
     }
   },
   mounted() {
-    // setInterval(() => {
-    this.canvas1 = null
-    let numdata = Math.random() * 100 - 0
-    // let numdata = 20
+    setInterval(() => {
+      // this.canvas1 = null
+      let numdata = Math.random() * 100 - 0
+      this.numdata = numdata
 
-    this.initCanvas1(numdata)
-    // }, 4000)
+      let divObj = document.getElementById('canvas-value')
+      divObj.innerHTML = ' 完成率：' + numdata.toFixed(2) + '%'
+      if (parseInt(numdata / 10) < 3) {
+        divObj.style.color = this.colorList[0]
+      }
+      if (parseInt(numdata / 10) >= 3 && parseInt(numdata / 10) < 7) {
+        divObj.style.color = this.colorList[1]
+      }
+      if (parseInt(numdata / 10) >= 7) {
+        divObj.style.color = this.colorList[2]
+      }
+
+      if (!this.mouseEvent) {
+        divObj.style.display = 'none'
+      }
+
+      this.initCanvas1(numdata)
+    }, 10000)
   },
   methods: {
     semi(x, y) {
@@ -42,7 +69,7 @@ export default {
     },
     // 右边canvas，仪表盘
     initCanvas1(num) {
-      this.canvas1 = this.$refs.canvas1
+      this.canvas1 = this.$refs.mycanvas1
       let canvas = document.getElementById('mycanvas1')
       let context = canvas.getContext('2d')
       let canvasWidth = canvas.width
@@ -164,6 +191,25 @@ export default {
         canvasHeight / 2 + (arcSemi - 53) * Math.sin((14 * Math.PI) / 6)
       )
       context.restore()
+
+      // 显示文字
+      context.save()
+      context.font = '20px Georgia'
+      context.textAlign = 'center'
+      // 创建渐变
+      let gradient = context.createLinearGradient(0, 0, canvasWidth, 0)
+      gradient.addColorStop('0', 'magenta')
+      gradient.addColorStop('0.5', 'blue')
+      gradient.addColorStop('1', 'red')
+      // 用渐变填色
+      context.fillStyle = gradient
+      context.fillText(
+        '值：' + num.toFixed(2) + '%',
+        canvasWidth / 2,
+        canvasHeight - 43
+      )
+      context.restore()
+
       // 画指针
       context.save()
       context.beginPath()
@@ -190,37 +236,7 @@ export default {
       }
       context.fill()
       context.stroke()
-      // context.restore()
 
-      // context.save()
-      // context.beginPath()
-      // context.moveTo(canvasWidth / 2, canvasHeight / 2)
-
-      // context.lineTo(
-      //   canvasWidth / 2 +
-      //     (arcSemi - 80) *
-      //       Math.cos((num / 100) * (10 / 6) * Math.PI + (2 / 3) * Math.PI),
-      //   canvasHeight / 2 +
-      //     (arcSemi - 80) *
-      //       Math.sin((num / 100) * (10 / 6) * Math.PI + (2 / 3) * Math.PI)
-      // )
-      // if (parseInt(num / 10) < 3) {
-      //   context.fillStyle = this.colorList[0]
-      //   context.strokeStyle = this.colorList[0]
-      // }
-      // if (parseInt(num / 10) >= 3 && parseInt(num / 10) < 7) {
-      //   context.fillStyle = this.colorList[1]
-      //   context.strokeStyle = this.colorList[1]
-      // }
-      // if (parseInt(num / 10) >= 7) {
-      //   context.fillStyle = this.colorList[2]
-      //   context.strokeStyle = this.colorList[2]
-      // }
-      // context.fill()
-      // context.stroke()
-      // context.restore()
-
-      // context.save()
       context.moveTo(
         canvasWidth / 2 + 5 * Math.cos(((num + 10) / 60) * Math.PI),
         canvasHeight / 2 + 5 * Math.sin(((num + 10) / 60) * Math.PI)
@@ -239,13 +255,6 @@ export default {
         canvasHeight / 2 - 5 * Math.sin(((num + 10) / 60) * Math.PI)
       )
 
-      // context.lineTo(
-      //   canvasWidth / 2 +
-      //     (arcSemi - 80) * Math.cos((num / 60) * Math.PI + (2 / 3) * Math.PI),
-      //   canvasHeight / 2 +
-      //     (arcSemi - 80) * Math.sin((num / 60) * Math.PI + (2 / 3) * Math.PI)
-      // )
-
       if (parseInt(num / 10) < 3) {
         context.fillStyle = this.colorList[0]
         context.strokeStyle = this.colorList[0]
@@ -262,12 +271,50 @@ export default {
       context.fill()
       context.stroke()
       context.restore()
+      if (this.mouseEvent !== '') {
+        this.handleMouseMove(this.mouseEvent)
+      }
+    },
+    handleMouseMove(e) {
+      this.mouseEvent = e
+      let divObj = document.getElementById('canvas-value')
+      let rect = document.getElementById('mycanvas1').getBoundingClientRect()
+      let x = e.clientX - rect.left
+      let y = e.clientY - rect.top
+      divObj.style.left = e.clientX + 10 + 'px'
+      divObj.style.top = e.clientY + 10 + 'px'
+      if (
+        document
+          .getElementById('mycanvas1')
+          .getContext('2d')
+          .isPointInPath(x, y)
+      ) {
+        divObj.style.display = 'block'
+      } else {
+        divObj.style.display = 'none'
+      }
     }
   }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
+.canvas-header {
+  h1,
+  p {
+    margin: 10px 0px;
+  }
+  p {
+    text-indent: 2em;
+  }
+}
 .bg-ccc {
   background: #ccc;
+}
+.style-test {
+  background: rgba(50, 50, 50, 0.5);
+  position: absolute;
+  border-radius: 5px;
+  padding: 10px;
+  display: none;
 }
 </style>
