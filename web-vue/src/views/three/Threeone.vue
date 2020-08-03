@@ -31,12 +31,13 @@ export default {
       canvas1: null,
       colorList: ['red', 'yellow', 'green'],
       numdata: 0,
-      mouseEvent: ''
+      mouseEvent: '',
+      timer: null
     }
   },
   mounted() {
-    setInterval(() => {
-      // this.canvas1 = null
+    this.timer = setInterval(() => {
+      this.canvas1 = null
       let numdata = Math.random() * 100 - 0
       this.numdata = numdata
 
@@ -58,6 +59,9 @@ export default {
 
       this.initCanvas1(numdata)
     }, 10000)
+  },
+  destroyed() {
+    clearInterval(this.timer)
   },
   methods: {
     semi(x, y) {

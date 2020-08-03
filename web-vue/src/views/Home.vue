@@ -1,6 +1,7 @@
 <template>
   <el-container class="ht100 wt100 overflow-y-hidden overflow-x-hidden">
     <el-aside
+      id="aside-width"
       class="menu-class"
       :style="{ width: isCollapse ? 'auto' : '240px' }"
     >
@@ -9,6 +10,7 @@
           v-model="isCollapse"
           active-color="#13ce66"
           inactive-color="#ff4949"
+          @change="handleChangeAside"
         >
         </el-switch>
       </div>
@@ -148,6 +150,9 @@ export default {
     },
     changeColor(command) {
       this.$store.commit('getColor', command)
+    },
+    handleChangeAside(value) {
+      this.$store.commit('getAsideWidth', value ? '65' : '240')
     },
     changeLang(command) {
       this.$i18n.locale = command

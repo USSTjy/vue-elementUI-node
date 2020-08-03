@@ -1,3 +1,4 @@
+// 修改框架样式
 .el-main {
   overflow: hidden;
 }
@@ -30,4 +31,8 @@
 .el-picker-panel__icon-btn:hover,
 .el-select-dropdown__item.selected {
   color: $--color-primary;
+}
+.el-date-editor.el-input,
+.el-date-editor.el-input__inner {
+  width: 100%;
 }
