@@ -1,9 +1,27 @@
 <template>
   <div class="wt100 ht100">
     <ul class="box" ref="box">
-      <li class="left" ref="left">西瓜</li>
+      <li class="left" ref="left">
+        <div class="left-content">
+          <el-input v-model="value"></el-input>
+          <div v-for="item in 28" :key="item">{{ item }}</div>
+          <p>
+            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+          </p>
+        </div>
+      </li>
       <li class="resize" ref="resize"></li>
-      <li class="mid" ref="mid">备注2</li>
+      <li class="mid" ref="mid">
+        <div class="left-content">
+          <p>
+            测试可以左右拖拽布局，左右两边设置有最小宽度
+          </p>
+          <div v-for="item in 38" :key="item">{{ item }}</div>
+          <p>
+            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+          </p>
+        </div>
+      </li>
     </ul>
   </div>
 </template>
@@ -12,7 +30,9 @@
 export default {
   name: 'Dashboard',
   data() {
-    return {}
+    return {
+      value: ''
+    }
   },
   computed: {
     asidewidth() {
@@ -32,6 +52,14 @@ export default {
   },
   mounted() {
     this.dragControllerDiv()
+    window.resize = () => {
+      let mid = document.getElementsByClassName('mid')
+      let box = document.getElementsByClassName('box')
+      let left = document.getElementsByClassName('left')
+      left[0].style.width = left[0].clientWidth
+      mid[0].style.width = box[0].clientWidth - 10 - left[0].clientWidth + 'px'
+      this.dragControllerDiv()
+    }
   },
   methods: {
     dragControllerDiv() {
@@ -74,6 +102,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.clear {
+  clear: both;
+}
 ul,
 li {
   list-style: none;
@@ -91,6 +122,17 @@ li {
   height: 100%;
   background: #c9c9c9;
   float: left;
+  overflow: hidden;
+  .left-content {
+    clear: both;
+    width: calc(100% -20px);
+    height: calc(100% - 20px);
+    padding: 10px;
+    overflow: auto;
+    p {
+      word-break: break-all;
+    }
+  }
 }
 .resize {
   width: 5px;
@@ -103,5 +145,16 @@ li {
   width: 70%;
   height: 100%;
   background: #f3f3f3;
+  overflow: hidden;
+  .left-content {
+    clear: both;
+    width: calc(100% -20px);
+    height: calc(100% - 20px);
+    padding: 10px;
+    overflow: auto;
+    p {
+      word-break: break-all;
+    }
+  }
 }
 </style>

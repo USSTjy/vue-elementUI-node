@@ -58,7 +58,9 @@
             </el-dropdown>
           </div>
           <div class="header-item cursor-pointer">个人中心</div>
-          <div class="header-item cursor-pointer">退出登录</div>
+          <div class="header-item cursor-pointer" @click="loginOUt">
+            退出登录
+          </div>
           <div class="header-item cursor-pointer">
             <el-dropdown trigger="click" @command="changeLang">
               <span>
@@ -78,10 +80,17 @@
           <div class="header-item cursor-pointer">设置</div>
         </div>
       </el-header>
-      <el-main class="overflow-y-hidden overflow-x-auto wt100">
+      <el-main class="overflow-y-hidden overflow-x-hidden wt100">
         <router-view />
       </el-main>
     </el-container>
+    <el-dialog title="" :visible.sync="loginoutVisible">
+      <span>是否确定退出系统？</span>
+      <span slot="footer">
+        <el-button @click="loginoutVisible = false">取消</el-button>
+        <el-button type="primary" @click="handleLoginOut">确定</el-button>
+      </span>
+    </el-dialog>
   </el-container>
 </template>
 
@@ -125,28 +134,27 @@ export default {
               name: '选项3-2'
             }
           ]
+        },
+        {
+          id: 'four',
+          name: '前端'
         }
       ],
-      systemLang: '中文'
+      systemLang: '中文',
+      loginoutVisible: false
     }
   },
   mounted() {
-    this.getMenuList()
+    this.defaultActive = sessionStorage.getItem('menuDefault')
   },
   methods: {
-    getMenuList() {
-      this.$router
-        .push({
-          path: '/' + this.defaultActive
-        })
-        .catch(err => err)
-    },
     handleSelectMenu(index) {
       this.$router
         .push({
           path: '/' + index
         })
         .catch(err => err)
+      sessionStorage.setItem('menuDefault', index)
     },
     changeColor(command) {
       this.$store.commit('getColor', command)
@@ -157,6 +165,14 @@ export default {
     changeLang(command) {
       this.$i18n.locale = command
       localStorage.setItem('lang', command)
+    },
+    loginOUt() {
+      this.loginoutVisible = true
+    },
+    handleLoginOut() {
+      this.$router.push({
+        name: 'Login'
+      })
     }
   }
 }

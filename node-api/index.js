@@ -16,8 +16,79 @@ app.all('*', (req, res, next) => {
  get请求获取前端传入的参数：req.query,
  post请求获取前端传入的参数：req.body
 */
-
 app.use(bodyParser.json())
+
+// TODO:连接数据库
+let mysql = require('mysql')
+let db = mysql.createConnection({
+  host: 'localhost',
+  port: '3306',
+  user: 'root',
+  password: 'jy18917092529',
+  database: 'web_vue',
+})
+db.connect((err) => {
+  if (err) {
+  } else {
+    console.log('ok')
+  }
+})
+
+app.post('/api/login', (req, res, next) => {
+  db.query('SELECT * FROM loginuser;', (err, resdb, fields) => {
+    if (err) {
+      res.json(
+        (data = {
+          code: 500,
+          msg: '数据库服务器报错',
+        })
+      )
+      throw err
+    } else {
+      let dataString = req.body
+      let stringList = []
+      let data
+      for (let i in dataString) {
+        stringList.push(i)
+      }
+      if (
+        stringList.indexOf('username') > -1 &&
+        stringList.indexOf('password') > -1
+      ) {
+        let userinfo
+        for (let i = 0; i < resdb.length; i++) {
+          if (dataString.username === resdb[i].username) {
+            userinfo = resdb[i]
+          }
+        }
+        if (userinfo) {
+          if (userinfo.password === dataString.password) {
+            data = {
+              code: 200,
+              msg: '成功',
+            }
+          } else {
+            data = {
+              code: 401,
+              msg: '用户名或密码错误',
+            }
+          }
+        } else {
+          data = {
+            code: 401,
+            msg: '查无此用户',
+          }
+        }
+      } else {
+        data = {
+          code: 400,
+          msg: '请求参数错误',
+        }
+      }
+      res.json(data)
+    }
+  })
+})
 app.get('/api/getHomeData', (req, res, next) => {
   let data = Mock.mock({
     code: 200,

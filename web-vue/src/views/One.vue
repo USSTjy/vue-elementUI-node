@@ -1,8 +1,14 @@
 <template>
-  <div class="ht100 overflow-y-auto padding-right-10">
-    <div>
-      <el-form :ref="form" :model="form" label-width="80px">
-        <el-row>
+  <div class="ht100 wt100 overflow-y-hidden">
+    <div class="ht100 wt100 overflow-y-auto">
+      <el-form
+        :ref="form"
+        :model="form"
+        :rules="formrules"
+        label-width="80px"
+        class="padding-10"
+      >
+        <el-row type="flex" justify="space-between">
           <el-col :span="12">
             <el-form-item label="活动名称">
               <el-input v-model="form.name"></el-input>
@@ -37,7 +43,9 @@
                     class="wt100"
                   ></el-date-picker>
                 </el-col>
-                <el-col :span="2">-</el-col>
+                <el-col :span="2" class="text-align-center">
+                  -
+                </el-col>
                 <el-col :span="11">
                   <el-date-picker
                     type="date"
@@ -145,7 +153,8 @@ export default {
         {
           label: '线下'
         }
-      ]
+      ],
+      formrules: {}
     }
   },
   methods: {
@@ -155,3 +164,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.padding-10 {
+  padding: 10px;
+}
+</style>

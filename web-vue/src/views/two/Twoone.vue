@@ -73,7 +73,6 @@ export default {
       }
       API.getOneData(params).then(res => {
         if (res.data.code === 200) {
-          console.log('data===', res)
           this.tableAllData = res.data.data
           this.tableTotal = res.data.data.length
           this.handleCurrentChange(1)

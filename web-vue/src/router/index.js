@@ -44,16 +44,15 @@ const routes = [
         name: 'Threetwo',
         component: () =>
           import(/* webpackChunkName: "project"*/ '../views/three/Threetwo.vue')
+      },
+      {
+        path: '/four',
+        name: 'Four',
+        component: () =>
+          import(/* webpackChunkName: "project"*/ '../views/four/Four.vue')
       }
     ]
   },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   component: () =>
-  //     import(/* webpackChunkName: "project" */ '../views/About.vue'),
-  //   children: []
-  // },
   {
     path: '*',
     name: 'Login',
