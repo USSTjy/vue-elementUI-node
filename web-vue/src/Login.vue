@@ -13,10 +13,10 @@
         <el-form-item label="密码" prop="password">
           <el-input v-model="loginForm.password" type="password"></el-input>
         </el-form-item>
+        <el-button type="primary" @click="gotoHome">
+          登录
+        </el-button>
       </el-form>
-      <el-button type="primary" @click="gotoHome">
-        登录
-      </el-button>
     </div>
   </div>
 </template>
@@ -84,13 +84,16 @@ export default {
 </script>
 <style scoped>
 .login-class {
+  display: flex;
+  align-items: center;
+  height: 100%;
   text-align: center;
-  width: 35%;
+  width: 380px;
   margin: 0 auto;
-  margin-top: 25%;
 }
 .login-bg {
-  background: url('./assets/images/login-bg.jpg') no-repeat;
-  background-size: 100% 100%;
+  /* background: url('./assets/images/login-bg.jpg') no-repeat;
+  background-size: 100% 100%; */
+  background: rgb(15, 18, 53);
 }
 </style>

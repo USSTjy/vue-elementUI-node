@@ -138,6 +138,10 @@ export default {
         {
           id: 'four',
           name: '前端'
+        },
+        {
+          id: 'websafety',
+          name: 'web安全问题'
         }
       ],
       systemLang: '中文',

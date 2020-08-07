@@ -20,7 +20,6 @@ new Vue({
   watch: {
     '$store.state.color': {
       handler(val) {
-        console.log('ddd', val)
         document.body.className = val
       }
     }

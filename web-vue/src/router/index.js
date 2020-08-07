@@ -50,6 +50,12 @@ const routes = [
         name: 'Four',
         component: () =>
           import(/* webpackChunkName: "project"*/ '../views/four/Four.vue')
+      },
+      {
+        path: '/websafety',
+        name: 'Websafety',
+        component: () =>
+          import(/* webpackChunkName: "project"*/ '../views/four/Websafety.vue')
       }
     ]
   },

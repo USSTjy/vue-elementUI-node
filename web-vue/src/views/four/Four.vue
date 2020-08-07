@@ -88,7 +88,36 @@
         <div class="grid-right">right</div>
       </div>
       <p>5、如何理解负margin</p>
-      <div></div>
+      <div class="view-dom">
+        <p>
+          负边距在普通文档流中的作用和效果（margin-bottom或margin-top负值，会减少高度,增加元素本身的高度，会减少兄弟元素的高度）
+        </p>
+        <div style="width:100px;height:100px;background:red;"></div>
+        <div class="view-margin"></div>
+        <p>
+          左和右的负边距对元素宽度的影响（margin-right 负值
+          没有设置宽度的情况，增加宽度。）
+          负边距不仅能影响元素在文档流中的位置，还能增加元素的宽度！
+        </p>
+        <div style="display:flex">
+          <div style="width:100px;height:100px;background:red; overflow:hidden">
+            <div
+              style="margin-right:50px;height:100px; overflow:auto; word-break:break-all"
+            >
+              dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+            </div>
+          </div>
+          <div style="height:100px;background:skyblue; margin-left:-50px">
+            kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+          </div>
+        </div>
+        <p>
+          负边距对浮动元素的影响（margin-left负值：覆盖）
+        </p>
+        <div></div>
+
+        <p></p>
+      </div>
 
       <p>6、CSS中哪些属性触发重绘？回流？</p>
       <div></div>
@@ -218,6 +247,13 @@ p {
     height: 10px;
     background: #ffffff;
   }
+}
+// margin负值
+.view-margin {
+  width: 100px;
+  height: 100px;
+  background: skyblue;
+  margin-top: -10px;
 }
 // 三角形
 .view-trangle {
